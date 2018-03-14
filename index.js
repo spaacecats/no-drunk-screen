@@ -1,7 +1,8 @@
-module.exports = function noBlurScreen(dispatch) {
-    dispatch.hook('sAbnormalityBegin', 2, (event) => {
-    //console.log('Abnormality:'+event.id+' Duration:'+event.duration+' Stacks:'+event.stacks)
-    if(event.id == "70237" || event.id == "905434")
-        {return false;}
-      });
+const BLOCKED = [70237,905434,47660800,48733,48734,48735,48736,48737,48738,48739,70234,70235,70236,70238];
+
+module.exports = function noDrunkScreen(dispatch) {
+
+    dispatch.hook('S_ABNORMALITY_BEGIN', 2, _ => {
+		if(BLOCKED.includes(_.id))return false	
+     });
 }
